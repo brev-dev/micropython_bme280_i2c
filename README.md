@@ -152,6 +152,31 @@ while 1:
 # {'pressure': 101412.0, 'humidity': 39.5, 'temperature': 27.86}
 ```
 
+## SPI example
+
+``` python
+import bme280_i2c_spi
+from time import sleep
+from machine import SPI, Pin
+import bme280_i2c_spi
+import ujson
+
+spi = SPI(1, baudrate=5000000, polarity=0, phase=0)
+cs = Pin(2, Pin.OUT)
+cs.on()
+h_bme = bme280_i2c_spi.BME280_I2C_SPI(spi=spi, spi_cs=cs)
+h_bme.set_measurement_settings({
+	'filter': bme280_i2c_spi.BME280_FILTER_COEFF_OFF,
+	'osr_h':  bme280_i2c_spi.BME280_OVERSAMPLING_1X,
+	'osr_p':  bme280_i2c_spi.BME280_OVERSAMPLING_1X,
+	'osr_t':  bme280_i2c_spi.BME280_OVERSAMPLING_1X})
+
+h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
+sleep(0.4)
+data=h_bme.get_measurement()
+cs.off()
+```
+
 ## A Note About Measurement Duration
 In the above examples there are sleep commands issued prior to each measurement to pause a given number of milliseconds before acquiring a new sample.  These pauses are defined by the data sheet in section `9. Appendix B: Measurement time and current calculation`.  
 
