@@ -94,7 +94,7 @@ This example implements the advised settings from the data sheet section `3.5.3 
 
 ``` python
 import machine
-import bme280_i2c
+import bme280_i2c_spi
 import time
 
 # Create a micropython I2C object with the appropriate device pins
@@ -131,7 +131,7 @@ This example implements the advised settings from the data sheet section `3.5.1 
 
 ``` python
 import machine
-import bme280_i2c
+import bme280_i2c_spi
 import time
 
 i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
