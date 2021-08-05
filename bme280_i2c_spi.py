@@ -1,5 +1,5 @@
 # Author(s): Jonathan Hanson 2018
-#
+# SPI added by Neville Barker 2020
 # This is more or less a straight read of the Bosch data sheet at:
 # https://www.bosch-sensortec.com/bst/products/all_products/bme280
 # and specifically:
