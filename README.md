@@ -1,5 +1,5 @@
 # Introduction
-This Micropython module enables I2C communication with a Bosch BME280 temperature, humidity, and pressure sensor.
+This Micropython module enables both I2C and SPI communication with a Bosch BME280 temperature, humidity, and pressure sensor.
 
 # Usage
 This module pretty closely follows the Bosch reference library's behavior (see the references below).
