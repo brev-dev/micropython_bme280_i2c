@@ -158,8 +158,6 @@ while 1:
 import bme280_i2c_spi
 from time import sleep
 from machine import SPI, Pin
-import bme280_i2c_spi
-import ujson
 
 spi = SPI(1, baudrate=5000000, polarity=0, phase=0)
 cs = Pin(2, Pin.OUT)
