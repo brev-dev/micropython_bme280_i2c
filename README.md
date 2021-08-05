@@ -175,7 +175,7 @@ h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
 sleep(0.4)
 cs.off()
 
-#reading measurement
+#getting measurement (repeat as needed)
 cs.on()
 data=h_bme.get_measurement()
 h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
