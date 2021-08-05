@@ -161,6 +161,8 @@ from machine import SPI, Pin
 
 spi = SPI(1, baudrate=5000000, polarity=0, phase=0)
 cs = Pin(2, Pin.OUT)
+
+#Initial configuration
 cs.on()
 h_bme = bme280_i2c_spi.BME280_I2C_SPI(spi=spi, spi_cs=cs)
 h_bme.set_measurement_settings({
@@ -171,7 +173,13 @@ h_bme.set_measurement_settings({
 
 h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
 sleep(0.4)
+cs.off()
+
+#reading measurement
+cs.on()
 data=h_bme.get_measurement()
+h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
+sleep(0.4)
 cs.off()
 ```
 
