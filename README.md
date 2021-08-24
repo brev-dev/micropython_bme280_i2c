@@ -1,3 +1,5 @@
+Forked from [triplepoint/micropython_bme280_i2c](https://github.com/triplepoint/micropython_bme280_i2c), with added SPI-interface compatibility (example usage [below]()).
+
 # Introduction
 This Micropython module enables both I2C and SPI communication with a Bosch BME280 temperature, humidity, and pressure sensor.
 
