@@ -157,15 +157,15 @@ while 1:
 ## SPI example
 
 ``` python
+from machine import SPI, Pin
 import bme280_i2c_spi
 from time import sleep
-from machine import SPI, Pin
 
 spi = SPI(1, baudrate=5000000, polarity=0, phase=0)
 cs = Pin(2, Pin.OUT)
 
 # Initial configuration
-cs.on() # Select this device
+cs.on() # Select this SPI device
 h_bme = bme280_i2c_spi.BME280_I2C_SPI(spi=spi, spi_cs=cs)
 h_bme.set_measurement_settings({
 	'filter': bme280_i2c_spi.BME280_FILTER_COEFF_OFF,
