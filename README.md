@@ -166,21 +166,21 @@ cs = Pin(2, Pin.OUT)
 
 # Initial configuration
 cs.on() # Select this SPI device
-h_bme = bme280_i2c_spi.BME280_I2C_SPI(spi=spi, spi_cs=cs)
-h_bme.set_measurement_settings({
+sensor = bme280_i2c_spi.BME280_I2C_SPI(spi=spi, spi_cs=cs)
+sensor.set_measurement_settings({
 	'filter': bme280_i2c_spi.BME280_FILTER_COEFF_OFF,
 	'osr_h':  bme280_i2c_spi.BME280_OVERSAMPLING_1X,
 	'osr_p':  bme280_i2c_spi.BME280_OVERSAMPLING_1X,
 	'osr_t':  bme280_i2c_spi.BME280_OVERSAMPLING_1X})
 
-h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
+sensor.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
 sleep(0.4)
 cs.off() # Deselect this device
 
 # Getting measurement (repeat as needed)
 cs.on()
-data=h_bme.get_measurement()
-h_bme.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
+data=sensor.get_measurement()
+sensor.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
 sleep(0.4)
 cs.off()
 ```
