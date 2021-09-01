@@ -6,11 +6,11 @@ This Micropython module enables both I2C and SPI communication with a Bosch BME2
 # Usage
 This module pretty closely follows the Bosch reference library's behavior (see the references below).
 
-The basic operation of the module requires initialization of an `BME280_I2C` instance, followed by sensor configuration, and finally acquiring a measurement.
+The basic operation of the module requires initialization of an `BME280_I2C_SPI` instance, followed by sensor configuration, and finally acquiring a measurement.
 
 Note that the BME280 has a couple of different operating modes (FORCED, and NORMAL), as well as several oversampling and filtering options, and it's a good idea to understand these specifics in order to get the most out of the part.  See the data sheet, specifically section `3. Functional description` to get an understanding of how this sensor works.
 
-Also, in the examples below, the I2C address is supplied as `bme280_i2c.BME280_I2C_ADDR_SEC` (`0x77`).  Be aware that `bme280_i2c.BME280_I2C_ADDR_PRIM` (`0x76`) is also available.
+Also, in the examples below, the I2C address is supplied as `bme280_i2c_spi.BME280_I2C_ADDR_SEC` (`0x77`).  Be aware that `bme280_i2c_spi.BME280_I2C_ADDR_PRIM` (`0x76`) is also available.
 
 ## Available Methods
 ### `get_measurement_settings()`
@@ -26,7 +26,7 @@ sensor.get_measurement_settings()
     'osr_t': 1
 }
 ```
-Where the values are constants that represent the values of the various settings.  See the various `BME280_OVERSAMPLING_*`, `BME280_STANDBY_TIME_*`, and `BME280_FILTER_COEFF_*` defines at the top of `bme280_i2c.py` and listed below.
+Where the values are constants that represent the values of the various settings.  See the various `BME280_OVERSAMPLING_*`, `BME280_STANDBY_TIME_*`, and `BME280_FILTER_COEFF_*` defines at the top of `bme280_i2c_spi.py` and listed below.
 
 ### `set_measurement_settings(settings: dict)`
 Sets the sensor configuration with a dict similar to the one returned by `get_measurement_settings()` above.  Note that all the keys are optional, and leaving one out will retain the currently-set value.
@@ -104,18 +104,18 @@ i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
 
 # Create a sensor object to represent the BME280
 # Note that this will error if the device can't be reached over I2C.
-sensor = bme280_i2c.BME280_I2C(address=bme280_i2c.BME280_I2C_ADDR_SEC, i2c=i2c)
+sensor = bme280_i2c_spi.BME280_I2C_SPI(address=bme280_i2c_spi.BME280_I2C_ADDR_SEC, i2c=i2c)
 
 # Configure the sensor for the application in question.
 sensor.set_measurement_settings({
-    'filter': bme280_i2c.BME280_FILTER_COEFF_16,
-    'standby_time': bme280_i2c.BME280_STANDBY_TIME_500_US,
-    'osr_h': bme280_i2c.BME280_OVERSAMPLING_1X,
-    'osr_p': bme280_i2c.BME280_OVERSAMPLING_16X,
-    'osr_t': bme280_i2c.BME280_OVERSAMPLING_2X})
+    'filter': bme280_i2c_spi.BME280_FILTER_COEFF_16,
+    'standby_time': bme280_i2c_spi.BME280_STANDBY_TIME_500_US,
+    'osr_h': bme280_i2c_spi.BME280_OVERSAMPLING_1X,
+    'osr_p': bme280_i2c_spi.BME280_OVERSAMPLING_16X,
+    'osr_t': bme280_i2c_spi.BME280_OVERSAMPLING_2X})
 
 # Start the sensor automatically sensing
-sensor.set_power_mode(bme280_i2c.BME280_NORMAL_MODE)
+sensor.set_power_mode(bme280_i2c_spi.BME280_NORMAL_MODE)
 
 # Wait for the measurement settle time, print the measurement, and repeat
 while 1:
@@ -138,16 +138,16 @@ import time
 
 i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
 
-sensor = bme280_i2c.BME280_I2C(address=bme280_i2c.BME280_I2C_ADDR_SEC, i2c=i2c)
+sensor = bme280_i2c.BME280_I2C_SPI(address=bme280_i2c_spi.BME280_I2C_ADDR_SEC, i2c=i2c)
 
 sensor.set_measurement_settings({
-    'filter': bme280_i2c.BME280_FILTER_COEFF_OFF,
-    'osr_h': bme280_i2c.BME280_OVERSAMPLING_1X,
-    'osr_p': bme280_i2c.BME280_OVERSAMPLING_1X,
-    'osr_t': bme280_i2c.BME280_OVERSAMPLING_1X})
+    'filter': bme280_i2c_spi.BME280_FILTER_COEFF_OFF,
+    'osr_h': bme280_i2c_spi.BME280_OVERSAMPLING_1X,
+    'osr_p': bme280_i2c_spi.BME280_OVERSAMPLING_1X,
+    'osr_t': bme280_i2c_spi.BME280_OVERSAMPLING_1X})
 
 while 1:
-    sensor.set_power_mode(bme280_i2c.BME280_FORCED_MODE)
+    sensor.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
     time.sleep_ms(40)
     print( sensor.get_measurement() )
 
