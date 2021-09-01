@@ -179,7 +179,7 @@ cs.off() # Deselect this device
 
 # Getting measurement (repeat as needed)
 cs.on()
-data=sensor.get_measurement()
+data = sensor.get_measurement()
 sensor.set_power_mode(bme280_i2c_spi.BME280_FORCED_MODE)
 sleep(0.4)
 cs.off()
